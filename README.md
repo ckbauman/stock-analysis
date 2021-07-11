@@ -29,49 +29,118 @@ INSERT IMAGE
 
 ### Execution times between Original and Refactored script
 
-We created 2 seperate alaysis macros.
+We created 2 seperate alaysis macros.  They created the same output, but used different methods.
 
-The first was
+The first macro was:
+
+    Sub yearValueAnalysis()
+
+This macro ran and created output into the **"All Stocks Analysis"** tab using an input button to indicate which year to run.  When the data was created, a message box pops up to indicate how long it took to run the macro.
+
+The time is determined using:
+
+    Dim startTime
+    Dim endTime
+
+The following images show run time for 2017 and 2018 using our original macro.
+
+INSERT IMAGES
+
+As you can see, the run time for 2017 and 2018 are:
+
+- .875 seconds (2017)
+- .890625 seconds (2018)
+
+The second refactored macro was:
+
+    Sub AllStocksAnalysisRefactored()
+
+This macro introduces a tickerIndex variable and only loops once.  This should speed up the run time.
+
+- **Step 1a:**  Create a ticker Index - need to Initialize to zero at start. Create a variable named tickerIndex and then set it = to zero to initialize it
+
+        Dim tickerIndex As String
+        tickerIndex = 0
+
+- **Step 1b:**  Create three output arrays - Same as tickers(12) array above to run 12 times
+
+        Dim tickerVolumes(12) As Long
+        Dim tickerStartingPrices(12) As Single
+        Dim tickerEndingPrices(12) As Single
+
+- **Step 2a:**  Create a for loop to initialize the tickerVolumes to zero. - As the array runs through all 12 Indexes as i - it will hold the output
+
+        For i = 0 To 11
+    
+            tickerVolumes(i) = 0
+    
+        Next i
+
+- **Step 2b:** Loop over all the rows in the spreadsheet. - from the input spreadsheet (already in starter code)
+
+        For i = 2 To RowCount 
+
+- **Step 3a:** Increase volume for current ticker - shown in hint - tickerVolume is previous plus current
+
+        tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
+
+- **Step 3b:** Check if the current row is the first row with the selected tickerIndex. If it is then get the current starting price
+
+        If Cells(i - 1, 1).Value <> tickers(tickerIndex) And Cells(i, 1).Value = tickers(tickerIndex) Then
+        
+            tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
+            
+        End If
+
+- **Step 3c:** check if the current row is the last row with the selected tickerIndex. If the next row's ticker doesn't match, increase the tickerIndex. If it matches then assign current closing price to ending price.
+
+        If Cells(i + 1, 1).Value <> tickers(tickerIndex) And Cells(i, 1).Value = tickers(tickerIndex) Then
+        
+            tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
+
+     - **Step 3d:** Increase the tickerIndex.  Takes the current value for tickerIndex and increases by 1 to move on to next.
+
+            tickerIndex = tickerIndex + 1
+            End If
 
 
-'sub jjjjj'
+- **Step 4:** Loop through your arrays to output the Ticker, Total Daily Volume, and Return.  looping through 12 rows again for each array - the values come from the year worksheets prior and are put into the "All Stocks Analysis" worksheet in row 4 and columns 1, 2 and 3
 
+        For i = 0 To 11
+        
+            Worksheets("All Stocks Analysis").Activate
+            Cells(4 + i, 1).Value = tickers(i)
+            Cells(4 + i, 2).Value = tickerVolumes(i)
+            Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
+        
+        
+        Next i
 
+The following images show run time for 2017 and 2018 using our refactored macro.
 
-The analysis was completed using the same initial dataset used in the prior analysis.
+INSERT IMAGES
 
-Following are the results of the data broken out to include only Plays and outcomes with their Goal amount.  Percentages were created in each category (Successful, Failed, Canceled).
+As you can see, the run time for 2017 and 2018 are:
 
-The following chart includes the Percent Outcomes per Dollar amount Goals for Plays.
+- .140625 seconds (2017)
+- .1640625 seconds (2018)
 
-### Challenges and Difficulties Encountered
+Refactoring shows a significant increase in efficency for the run time.  It may not appear that different for such a small dataset, but it would be a major improvement for a larger dataset.
 
-#### Challenges for Theater Outcomes by Launch Date
+## Summary
 
-Please note that Theater data includes all information for Musicals, Plays and Spaces.  Plays make up approximatley 76% of the dataset, while Spaces is 13% and Musicals is at 10%.  Anlysis of this data broken out by subcategory show that Spaces and Musicals are very sporatic, where Plays determines the primary trend for Theater productions.  In hindsight, this dataset should only be looking at Plays to keep our analysis consistent between the 2 review categories.
+### What are the advantages or disadvantages of refactoring code?
 
-#### Challenges for Outcomes Basaed on Goals
+Advantages to refactoring include improving efficiency and run time of the code.  Requirements change and it is worth reviewing code to run more effectively.
 
-Both the Success and Failure lines are fairly consistent until around the $35,000 amount.  Further analysis should be done to determine what is causing these anomalies in the dataset.
+Disadvantages are *"don't fix what is not broken"*.  It takes time to rework code and it might not be a priority just yet.
 
-Also note that the Dollar amounts were not converted based on currency.  This could explain some of the anomalies in the dataset.
+In this Module, the refactoring was shown to improve run time.
 
-## Results
+### How do these pros and cons apply to refactoring the original VBA script
+ ?
+We refactored the original VBA script and it showed an improvement on run time.  The refactored code only had to run 1 time vs. running multiple times in a double loop.
 
-### Outcomes based on Launch Date?
+See refactored code below:
 
-- The graph indicates that Theater launches are most successful in the Summer months of May, June and July with a declining rate as you head into the Fall and Winter.  Launch dates in the months of November and December see the lowest success rates and may be affected by the Holidays.
-
-- Data also suggests that about 40% of launches fail to meet their goal.  Very few launches are canceled and have little impact on the data.
-
-### Outcomes based on Goals?
-
-- The graph indicates that Plays generally failed to meet their goal as the dollar amounts increased.
-
-- The graph also indicates that Plays generally succeeded to meet their goal up to about $20,000 funding goals.
-
-### Limitations of this dataset?
-
-- The 2 reviews in the analysis should have been reviewing the same breakout to produce more consistency.  Either all Theaters or all Plays would have allowed us to standardize the analysis more efficiently.
-
-- Other possible tables and/or graphs might include an analysis of length of the campaign vs. outcome as well as appropriately converting the correct currency amounts in the table.
+INSERT IMAGES
