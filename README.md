@@ -145,4 +145,10 @@ We refactored the original VBA script and it showed an improvement on run time. 
 
 See refactored code below:
 
-INSERT IMAGES
+![Refactored code 1](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Code_1.png)
+
+![Refactored code 2](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Code_2.png)
+
+![Refactored code 3](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Code_3.png)
+
+
