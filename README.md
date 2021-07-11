@@ -22,7 +22,7 @@ The only negative Return was for **TERP** at -7.2%.
 
 Stock analysis for 2018 shows that most stocks showed a negative percent increase on it's Return over the year
 
-INSERT IMAGE
+![VBA Output 2018](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2018_Output.png)
 
 **DQ** took a huge drop at -62.6% but **ENPH** and **RUN** were the only stocks that remained positive over the 2 years.  In general, 2018 stocks did not perform well
 
