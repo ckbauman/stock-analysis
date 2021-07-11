@@ -44,7 +44,8 @@ The time is determined using:
 
 The following images show run time for 2017 and 2018 using our original macro.
 
-INSERT IMAGES
+![VBA Original Runtime 2017](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2017Original.png)
+![VBA Original Runtime 2018](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2018Original.png)
 
 As you can see, the run time for 2017 and 2018 are:
 
