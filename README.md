@@ -137,8 +137,8 @@ Disadvantages are *"don't fix what is not broken"*.  It takes time to rework cod
 
 In this Module, the refactoring was shown to improve run time.
 
-### How do these pros and cons apply to refactoring the original VBA script
- ?
+### How do these pros and cons apply to refactoring the original VBA script?
+ 
 We refactored the original VBA script and it showed an improvement on run time.  The refactored code only had to run 1 time vs. running multiple times in a double loop.
 
 See refactored code below:
