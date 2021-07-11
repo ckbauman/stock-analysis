@@ -14,7 +14,7 @@ Now that we have developed the information for 12 specific stocks, it was determ
 
 Stock analysis for 2017 shows that all but 1 of the stocks showed a positive percent increase on it's Return over the year.  
 
-INSERT IMAGE
+![VBA_2017_Output](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2017_Output.png)
 
 Specifically **DQ**, **ENPH** and **SEDG** had very large Returns.  You can see why Steve's parents decided they wanted to invest in **DQ** in 2018.
 
