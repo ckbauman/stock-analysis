@@ -118,6 +118,7 @@ This macro introduces a tickerIndex variable and only loops once.  This should s
         Next i
 
 The following images show run time for 2017 and 2018 using our refactored macro.
+
 ![VBA Refactored Runtime 2017](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2017.png)
 ![VBA Refactored Runtime 2018](https://github.com/ckbauman/stock-analysis/blob/main/VBA_Challenge_2018.png)
 
